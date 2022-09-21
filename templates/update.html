@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}
+  Update
+{% endblock title %}
+{% block body %}
+  
+
+    <div class="container">
+        <h2>Update Your Todo</h2>
+
+      <form action="/update/{{todo.sno}}" method="post">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name Of Task </label>
+              <input type="text" class="form-control" name="title" value="{{todo.title}}"  id="exampleInputEmail1" aria-describedby="emailHelp">
+              
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Description about ToDo</label>
+              <input type="text" name="desc" value="{{todo.desc}}" class="form-control" id="exampleInputPassword1">
+            </div>
+         
+            <button type="submit" class="btn btn-outline-dark">Update Todo</button>
+          </form>
+        <hr>
+        <table class="table">
+          <h3>Your Todo</h3><hr>
+          {% if allTodo|length == 0 %}
+
+          <div class="alert alert-warning" role="alert">
+            No Record Found...!!! 
+          </div>
+              
+          {% else %}
+            <thead>
+              <tr>
+                <th scope="col">S.No.</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+          
+
+            <tbody>
+             
+                
+              
+              {% for todo in allTodo  %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td>
+                <td>{{todo.date_created}}</td>
+                <td>
+                  <a href="/update/{{todo.sno}}" class="btn btn-outline-dark btn-sm mx-1"> Update </a>
+                  <a href="/delete/{{todo.sno}}" class="btn btn-outline-dark btn-sm mx-1"> Delete </a>
+                  
+                </td>
+              </tr>
+              {% endfor %}
+            
+            </tbody>
+            {% endif %}
+          </table>
+
+    </div>
+    
+    
+    
+    
+    {% endblock body %} 
+    
